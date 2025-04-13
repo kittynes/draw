@@ -1,0 +1,35 @@
+-- Скрипт by shoggoth
+
+
+
+
+
+local function sendMultipleMessages()
+    local messages = {
+        "⬜⬜⬜⬜⬜⬜⬜⬜⬜",
+        "⬛⬛⬛⬜⬜⬜⬛⬛⬛",
+        "⬛⬛⬛⬜⬜⬜⬛⬛⬛",
+        "⬜⬜⬜⬜⬛⬜⬜⬜⬜",
+        "⬜⬛⬜⬜⬜⬜⬜⬛⬜",
+        "⬜⬜⬛⬛⬛⬛⬛⬜⬜",
+        "⬜⬜⬜⬜⬜⬜⬜⬜⬜"
+    }
+
+    for i = 1, #messages do
+        local messageToSend = messages[i] 
+        local TextChatService = game:GetService("TextChatService")
+
+        if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+            local textChannel = TextChatService.TextChannels.RBXGeneral
+            textChannel:SendAsync(messageToSend)
+        else
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(messageToSend, "All")
+        end
+        
+        wait(0.1) 
+    end
+end
+
+
+sendMultipleMessages()
+
